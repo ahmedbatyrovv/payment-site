@@ -1,41 +1,44 @@
-import { Copy } from 'lucide-react';
+import NumberRow from './NumberRow'
+import { TERMINAL_NUMBERS } from '../data'
 
 export default function TerminalPanel({ t, showToast }) {
-  const terminals = [
-    { id: 1, number: "62434203" },
-    { id: 2, number: "64883003" },
-  ];
-
-  const copyToClipboard = (num) => {
-    navigator.clipboard.writeText(num);
-    showToast(`${num} 📋 Kopya edildi!`);
-  };
-
   return (
-    <div className="bg-white dark:bg-[#0f1a13] rounded-3xl shadow-xl p-6 md:p-8 border border-green-100 dark:border-green-900/30">
-      <h2 className="text-2xl font-semibold mb-6">Terminal arkaly töleg</h2>
-      
-      <div className="space-y-4">
-        {terminals.map((term) => (
-          <div key={term.id} className="flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-50 dark:bg-[#1a2a20] p-5 rounded-2xl">
-            <div className="flex-1">
-              <p className="text-sm text-green-600 dark:text-green-500">Terminal Nomer {term.id}</p>
-              <p className="font-mono text-2xl font-bold text-green-700 dark:text-green-400 tracking-widest">{term.number}</p>
-            </div>
-            <button
-              onClick={() => copyToClipboard(term.number)}
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl flex items-center gap-2 transition-all active:scale-95"
-            >
-              <Copy size={20} />
-              Kopya et
-            </button>
-          </div>
-        ))}
-      </div>
+    <div className="animate-slide-in">
+      <div className="dark:bg-[rgba(19,33,21,0.5)] bg-white/70 backdrop-blur-md border dark:border-green-500/15 border-green-600/18 rounded-[22px] overflow-hidden card-glow dark:card-glow card-glow-light transition-all duration-300">
 
-      <div className="mt-8 text-sm text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-950/50 p-5 rounded-2xl">
-        Töleg geçireniňizden soň suraty admine ugradyň.
+        {/* Card Head */}
+        <div className="flex items-center gap-4 px-6 py-5 dark:bg-gradient-to-br dark:from-green-500/12 dark:to-green-500/5 bg-gradient-to-br from-green-600/10 to-green-600/4 border-b dark:border-green-500/15 border-green-600/18 transition-colors duration-300">
+          <div className="w-12 h-12 rounded-[13px] flex items-center justify-center text-[1.35rem] flex-shrink-0 bg-gradient-to-br from-green-700 to-green-500 shadow-lg shadow-green-500/30">
+            🏧
+          </div>
+          <div>
+            <div className="text-[.66rem] font-bold tracking-[.1em] uppercase dark:text-green-400 text-green-700 mb-0.5">{t.termTag}</div>
+            <div className="text-[1.02rem] font-extrabold tracking-tight dark:text-white text-gray-900">{t.termTitle}</div>
+          </div>
+        </div>
+
+        {/* Card Body */}
+        <div className="p-5">
+          {/* Hint */}
+          <div className="flex gap-2.5 items-start dark:bg-green-500/5 bg-green-600/6 border dark:border-green-500/14 border-green-600/16 rounded-xl p-3.5 mb-4 text-[.79rem] dark:text-green-400/80 text-green-800/80 leading-relaxed transition-colors duration-300">
+            <span className="text-[.95rem] flex-shrink-0 mt-0.5">💡</span>
+            <span>{t.termHint}</span>
+          </div>
+
+          {/* Numbers */}
+          <div className="flex flex-col gap-2.5">
+            {TERMINAL_NUMBERS.map(({ id, label, value }) => (
+              <NumberRow key={id} badge={label} value={value} t={t} showPay={false} onCopy={showToast} />
+            ))}
+          </div>
+
+          {/* Info */}
+          <div className="flex gap-2.5 items-start dark:bg-green-500/5 bg-green-600/6 border dark:border-green-500/14 border-green-600/16 border-l-[3px] dark:border-l-green-500 border-l-green-600 rounded-xl p-3.5 mt-4 text-[.8rem] dark:text-green-400/80 text-green-800/80 leading-relaxed transition-colors duration-300">
+            <span className="flex-shrink-0">📸</span>
+            <span>{t.termInfo}</span>
+          </div>
+        </div>
       </div>
     </div>
-  );
+  )
 }

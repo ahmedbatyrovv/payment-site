@@ -1,91 +1,105 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
+const LANGS = [
+  { code: 'tk', flag: '🇹🇲', label: 'TK' },
+  { code: 'ru', flag: '🇷🇺', label: 'RU' },
+  { code: 'tr', flag: '🇹🇷', label: 'TR' },
+];
+
 export default function Header({ lang, setLang, theme, toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const languages = [
-    { code: 'tk', flag: '🇹🇲', label: 'Türkmençe' },
-    { code: 'ru', flag: '🇷🇺', label: 'Русский' },
-    { code: 'tr', flag: '🇹🇷', label: 'Türkçe' },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-[#09100b]/95 backdrop-blur-xl border-b border-green-100 dark:border-green-900">
-      <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-5">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="text-3xl font-bold tracking-tighter">IsmailUSA</div>
-            <div className="text-green-600 dark:text-green-500 font-medium text-sm">AhmedDev</div>
-          </div>
+    <header className="sticky top-0 z-50 backdrop-blur-lg border-b border-green-500/15 dark:bg-[rgba(9,16,11,0.88)] bg-[rgba(238,248,241,0.90)] transition-colors duration-300">
+      <div className="w-full px-5 sm:px-8 py-3 flex items-center justify-between gap-3">
+        
+        {/* Logo */}
+        <span className="gradient-text font-sora font-extrabold text-[1.08rem] tracking-tight whitespace-nowrap">
+          IsmailUSA · AhmedDev
+        </span>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-4">
-            <div className="flex bg-gray-100 dark:bg-[#1a2a20] rounded-3xl p-1 shadow-inner">
-              {languages.map((item) => (
-                <button
-                  key={item.code}
-                  onClick={() => setLang(item.code)}
-                  className={`px-5 py-2.5 text-sm rounded-3xl transition-all flex items-center gap-2
-                    ${lang === item.code ? 'bg-white dark:bg-[#0f1a13] shadow font-semibold' : 'hover:bg-white/60 dark:hover:bg-[#13281f]'}`}
-                >
-                  <span className="text-lg">{item.flag}</span>
-                  <span>{item.label}</span>
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={toggleTheme}
-              className="w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-[#1a2a20] hover:bg-gray-200 dark:hover:bg-[#13281f] rounded-3xl transition-all text-xl"
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
-          </div>
-
-          {/* Burger Button */}
+        {/* Desktop Controls */}
+        <div className="hidden md:flex items-center gap-2">
+          {/* Theme Toggle */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-[#1a2a20] rounded-3xl"
+            onClick={toggleTheme}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-[.95rem]
+              dark:bg-green-500/10 bg-green-600/10
+              dark:border-green-500/20 border-green-600/20 border-[1.5px]
+              dark:text-green-400 text-green-700
+              hover:scale-110 transition-all duration-200"
+            aria-label="Toggle theme"
           >
-            {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+            {theme === 'dark' ? '🌙' : '☀️'}
           </button>
+
+          {/* Language Buttons */}
+          <div className="flex gap-1">
+            {LANGS.map(({ code, flag, label }) => (
+              <button
+                key={code}
+                onClick={() => setLang(code)}
+                className={`px-3 py-1.5 rounded-lg text-[.75rem] font-bold tracking-wide border-[1.5px] transition-all duration-200 font-sora
+                  ${lang === code
+                    ? 'dark:bg-green-500/10 bg-green-600/10 dark:border-green-500/35 border-green-600/40 dark:text-green-400 text-green-700'
+                    : 'border-transparent dark:text-green-700/70 text-green-800/50 hover:dark:bg-green-500/6 hover:bg-green-600/6 hover:dark:border-green-500/20 hover:border-green-600/20'
+                  }`}
+              >
+                {flag} {label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 bg-white dark:bg-[#0f1a13] rounded-3xl border border-green-100 dark:border-green-900 shadow-xl">
-            <div className="flex flex-col gap-2 px-4">
-              {languages.map((item) => (
-                <button
-                  key={item.code}
-                  onClick={() => {
-                    setLang(item.code);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`flex items-center gap-4 px-5 py-4 text-lg rounded-2xl transition-all
-                    ${lang === item.code ? 'bg-green-100 dark:bg-green-900/50 font-semibold' : 'hover:bg-gray-100 dark:hover:bg-[#1a2a20]'}`}
-                >
-                  <span className="text-2xl">{item.flag}</span>
-                  <span>{item.label}</span>
-                </button>
-              ))}
+        {/* Mobile Burger Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-green-500/10 transition-colors"
+        >
+          {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+        </button>
+      </div>
 
-              <button
-                onClick={() => {
-                  toggleTheme();
-                  setIsMenuOpen(false);
-                }}
-                className="flex items-center gap-4 px-5 py-4 text-lg rounded-2xl hover:bg-gray-100 dark:hover:bg-[#1a2a20] mt-2"
-              >
-                <span className="text-2xl">{theme === 'dark' ? '☀️' : '🌙'}</span>
-                <span>Tema çalşyr</span>
-              </button>
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-green-500/10 bg-white/95 dark:bg-[#09100b]/95 backdrop-blur-lg px-5 py-6">
+          <div className="flex flex-col gap-4">
+            
+            {/* Theme Toggle in Mobile */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-3 px-4 py-4 rounded-2xl hover:bg-green-500/10 transition-all w-full text-left"
+            >
+              <span className="text-2xl">{theme === 'dark' ? '🌙' : '☀️'}</span>
+              <span className="font-medium">Tema çalşyr ({theme === 'dark' ? 'Dark' : 'Light'})</span>
+            </button>
+
+            {/* Language Buttons in Mobile */}
+            <div className="px-4 py-2">
+              <p className="text-xs text-green-600 dark:text-green-500 mb-3 font-medium">Dil saýlaň</p>
+              <div className="flex flex-wrap gap-2">
+                {LANGS.map(({ code, flag, label }) => (
+                  <button
+                    key={code}
+                    onClick={() => {
+                      setLang(code);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`px-5 py-3 rounded-2xl text-base font-semibold border-[1.5px] transition-all
+                      ${lang === code
+                        ? 'dark:bg-green-500/10 bg-green-600/10 dark:border-green-500/40 border-green-600/40 dark:text-green-400 text-green-700'
+                        : 'border-transparent hover:bg-green-500/10'
+                      }`}
+                  >
+                    {flag} {label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 }

@@ -1,59 +1,44 @@
-import { Copy, Phone } from 'lucide-react';
+import NumberRow from './NumberRow'
+import { PHONE_NUMBERS } from '../data'
 
 export default function PhonePanel({ t, showToast }) {
-  const phoneNumbers = [
-    "+993 62 434 203",
-    "+993 64 883 003",
-    "+993 65 123 456",
-    "+993 61 987 654",
-    "+993 63 555 777",
-    "+993 62 111 222",
-    "+993 64 777 888",
-    "+993 65 999 000",
-    "+993 63 222 111",
-  ];
-
-  const copyToClipboard = (number) => {
-    navigator.clipboard.writeText(number.replace(/\s/g, ''));
-    showToast(`${number} 📋 Kopya edildi!`);
-  };
-
   return (
-    <div className="bg-white dark:bg-[#0f1a13] rounded-3xl shadow-xl p-5 sm:p-8 border border-green-100 dark:border-green-900/30">
-      <div className="flex items-center gap-3 mb-7">
-        <div className="w-12 h-12 bg-green-500/10 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center">
-          <Phone size={28} />
-        </div>
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold">Telefondan 0804 arkaly töleg</h2>
-          <p className="text-green-600 dark:text-green-500 mt-1">0804 ulanyp töleg ediň</p>
-        </div>
-      </div>
+    <div className="animate-slide-in">
+      <div className="dark:bg-[rgba(19,33,21,0.5)] bg-white/70 backdrop-blur-md border dark:border-green-500/15 border-green-600/18 rounded-[22px] overflow-hidden card-glow dark:card-glow card-glow-light transition-all duration-300">
 
-      <div className="grid grid-cols-1 gap-4">
-        {phoneNumbers.map((num, index) => (
-          <div 
-            key={index}
-            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gray-50 dark:bg-[#1a2a20] p-5 rounded-2xl border border-green-100 dark:border-green-900/30 hover:border-green-500 transition-all"
-          >
-            <div className="font-mono text-xl sm:text-2xl font-semibold tracking-wider text-green-700 dark:text-green-400">
-              {num}
-            </div>
-            
-            <button
-              onClick={() => copyToClipboard(num)}
-              className="bg-green-600 hover:bg-green-700 active:bg-green-800 text-white px-6 py-3.5 rounded-2xl flex items-center justify-center gap-2 font-medium transition-all w-full sm:w-auto"
-            >
-              <Copy size={20} />
-              Kopya et
-            </button>
+        {/* Card Head */}
+        <div className="flex items-center gap-4 px-6 py-5 dark:bg-gradient-to-br dark:from-green-500/12 dark:to-green-500/5 bg-gradient-to-br from-green-600/10 to-green-600/4 border-b dark:border-green-500/15 border-green-600/18 transition-colors duration-300">
+          <div className="w-12 h-12 rounded-[13px] flex items-center justify-center text-[1.35rem] flex-shrink-0 bg-gradient-to-br from-green-700 to-green-500 shadow-lg shadow-green-500/30">
+            📱
           </div>
-        ))}
-      </div>
+          <div>
+            <div className="text-[.66rem] font-bold tracking-[.1em] uppercase dark:text-green-400 text-green-700 mb-0.5">{t.phoneTag}</div>
+            <div className="text-[1.02rem] font-extrabold tracking-tight dark:text-white text-gray-900">{t.phoneTitle}</div>
+          </div>
+        </div>
 
-      <div className="mt-8 p-6 bg-green-50 dark:bg-green-950/60 rounded-2xl text-[15px] leading-relaxed border border-green-200 dark:border-green-900">
-        📌 <span className="font-semibold">Tölegden soň:</span> 0801 belgiden gelen çegiň suratyny admine ugradyň.
+        {/* Card Body */}
+        <div className="p-5">
+          {/* Hint */}
+          <div className="flex gap-2.5 items-start dark:bg-green-500/5 bg-green-600/6 border dark:border-green-500/14 border-green-600/16 rounded-xl p-3.5 mb-4 text-[.79rem] dark:text-green-400/80 text-green-800/80 leading-relaxed transition-colors duration-300">
+            <span className="text-[.95rem] flex-shrink-0 mt-0.5">💡</span>
+            <span dangerouslySetInnerHTML={{ __html: t.phoneHint }} />
+          </div>
+
+          {/* Numbers */}
+          <div className="flex flex-col gap-2.5">
+            {PHONE_NUMBERS.map((num, i) => (
+              <NumberRow key={i} badge={i + 1} value={num} t={t} showPay={true} onCopy={showToast} />
+            ))}
+          </div>
+
+          {/* Info */}
+          <div className="flex gap-2.5 items-start dark:bg-green-500/5 bg-green-600/6 border dark:border-green-500/14 border-green-600/16 border-l-[3px] dark:border-l-green-500 border-l-green-600 rounded-xl p-3.5 mt-4 text-[.8rem] dark:text-green-400/80 text-green-800/80 leading-relaxed transition-colors duration-300">
+            <span className="flex-shrink-0">📸</span>
+            <span dangerouslySetInnerHTML={{ __html: t.phoneInfo }} />
+          </div>
+        </div>
       </div>
     </div>
-  );
+  )
 }

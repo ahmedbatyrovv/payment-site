@@ -55,16 +55,7 @@ export default function NumberRow({ badge, value, t, showPay = false, onCopy }) 
           {copied ? '✓' : '📋'} {t.copy}
         </button>
 
-        {showPay && (
-          <button
-            onClick={handleDial}
-            className="flex items-center gap-1 px-3 py-2 rounded-[9px] text-[.69rem] font-bold text-white font-sora
-              bg-gradient-to-br from-green-700 to-green-500
-              btn-pay-glow hover:-translate-y-px hover:scale-105 transition-all duration-200"
-          >
-            {t.pay}
-          </button>
-        )}
+       
       </div>
     </div>
   )
