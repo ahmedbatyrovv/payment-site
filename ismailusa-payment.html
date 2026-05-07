@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tk" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IsmailUSA - AhmedDev Payment</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+[data-theme="dark"]{
+  --bg:#09100b;--bg2:#0e1a10;--bg3:#121f14;--surface:#13211580;
+  --border:rgba(34,197,94,.16);--border2:rgba(34,197,94,.35);
+  --text:#dff0e4;--text2:#7aab82;--text3:#3d6645;
+  --accent:#22c55e;--accent2:#16a34a;
+  --accentBg:rgba(34,197,94,.10);--accentBg2:rgba(34,197,94,.055);
+  --mono:#86efac;--shadow:rgba(0,0,0,.55);--glow:rgba(34,197,94,.20);
+  --header:rgba(9,16,11,.88);--tabOff:#0e1a10;--tabText:#4a7a52;
+}
+[data-theme="light"]{
+  --bg:#eef8f1;--bg2:#e0f2e6;--bg3:#d4eddb;--surface:#ffffffcc;
+  --border:rgba(22,163,74,.18);--border2:rgba(22,163,74,.4);
+  --text:#0d2612;--text2:#2a6638;--text3:#82b890;
+  --accent:#16a34a;--accent2:#15803d;
+  --accentBg:rgba(22,163,74,.10);--accentBg2:rgba(22,163,74,.055);
+  --mono:#166534;--shadow:rgba(0,0,0,.10);--glow:rgba(22,163,74,.15);
+  --header:rgba(238,248,241,.90);--tabOff:#e0f2e6;--tabText:#4a7a52;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 60% 38% at 18% 6%,var(--glow) 0%,transparent 65%),
+             radial-gradient(ellipse 45% 40% at 82% 88%,rgba(34,197,94,.05) 0%,transparent 65%),
+             repeating-linear-gradient(0deg,transparent,transparent 47px,var(--border) 47px,var(--border) 48px),
+             repeating-linear-gradient(90deg,transparent,transparent 47px,var(--border) 47px,var(--border) 48px);
+  opacity:.55;transition:opacity .3s}
+.wrap{position:relative;z-index:1}
+
+/* HEADER */
+header{background:var(--header);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;transition:background .3s,border-color .3s}
+.hinner{max-width:100%;margin:0;padding:13px 32px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-weight:800;font-size:1.08rem;letter-spacing:-.03em;background:linear-gradient(90deg,var(--accent),#4ade80,#86efac);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.hright{display:flex;align-items:center;gap:7px}
+
+/* THEME BTN */
+.theme-btn{width:36px;height:36px;border-radius:50%;background:var(--accentBg);border:1.5px solid var(--border);color:var(--text2);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.theme-btn:hover{border-color:var(--border2);transform:scale(1.08)}
+
+/* LANG */
+.langs{display:flex;gap:3px}
+.lbtn{padding:7px 9px;border-radius:8px;border:1.5px solid transparent;background:transparent;color:var(--tabText);font-size:.7rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;letter-spacing:.02em;white-space:nowrap}
+.lbtn:hover{background:var(--accentBg2);border-color:var(--border);color:var(--accent)}
+.lbtn.on{background:var(--accentBg);border-color:var(--border2);color:var(--accent)}
+
+/* HERO */
+.hero{max-width:660px;margin:0 auto;padding:38px 18px 22px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--accentBg2);border:1px solid var(--border);border-radius:9999px;padding:5px 17px;font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px;transition:background .3s,border-color .3s}
+.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--glow)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.hero h1{font-size:clamp(1.45rem,5vw,2rem);font-weight:800;letter-spacing:-.04em;margin-bottom:10px;line-height:1.15}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero p{font-size:.875rem;color:var(--text2);line-height:1.65;max-width:400px;margin:0 auto}
+
+/* METHOD TABS */
+.mtabs-wrap{max-width:660px;margin:0 auto;padding:0 18px 26px}
+.mtabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:9px;transition:background .3s,border-color .3s}
+.mtab{padding:18px 14px 16px;border-radius:14px;background:transparent;border:1.5px solid transparent;cursor:pointer;text-align:center;transition:all .28s cubic-bezier(.34,1.56,.64,1);font-family:inherit;color:var(--tabText)}
+.mtab:hover{background:var(--accentBg2);border-color:var(--border);transform:translateY(-1px)}
+.mtab.on{background:var(--surface);border-color:var(--border2);color:var(--text);box-shadow:0 4px 24px var(--glow);transform:translateY(-2px)}
+.mtab-ico{font-size:1.9rem;display:block;margin-bottom:7px;line-height:1}
+.mtab-lbl{font-size:.8rem;font-weight:800;letter-spacing:-.015em;display:block;line-height:1.3}
+.mtab-sub{font-size:.66rem;margin-top:4px;display:block;color:var(--text3);font-weight:500;transition:color .2s}
+.mtab.on .mtab-sub{color:var(--text2)}
+
+/* PANEL */
+.panel{display:none;max-width:660px;margin:0 auto;padding:0 18px 32px;animation:slideIn .35s cubic-bezier(.34,1.56,.64,1)}
+.panel.on{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARD */
+.card{background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 8px 40px var(--shadow);transition:background .3s,border-color .3s,box-shadow .3s}
+.chead{background:linear-gradient(135deg,var(--accentBg),var(--accentBg2));border-bottom:1px solid var(--border);padding:20px 22px;display:flex;align-items:center;gap:14px;transition:background .3s,border-color .3s}
+.cico{width:48px;height:48px;background:linear-gradient(135deg,var(--accent2),var(--accent));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0;box-shadow:0 4px 16px var(--glow)}
+.ctag{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.ctitle{font-size:1.02rem;font-weight:800;letter-spacing:-.025em;color:var(--text)}
+.cbody{padding:18px 18px}
+
+/* HINT */
+.hint{display:flex;gap:10px;align-items:flex-start;background:var(--accentBg2);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:16px;font-size:.79rem;color:var(--text2);line-height:1.65;transition:background .3s,border-color .3s}
+.hint-icon{font-size:.95rem;flex-shrink:0;margin-top:1px}
+
+/* NUM LIST */
+.nlist{display:flex;flex-direction:column;gap:9px}
+.nrow{display:flex;align-items:center;gap:9px;padding:13px 15px;border-radius:13px;background:var(--accentBg2);border:1px solid var(--border);transition:background .2s,border-color .2s}
+.nrow:hover{background:var(--accentBg);border-color:var(--border2)}
+.nbadge{min-width:30px;height:30px;border-radius:9px;background:var(--accentBg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.64rem;font-weight:800;color:var(--accent);flex-shrink:0;letter-spacing:.02em}
+.nval{font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;color:var(--mono);flex:1;letter-spacing:.04em;transition:color .3s}
+.btnrow{display:flex;gap:6px;flex-shrink:0}
+
+.bcopy{display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:9px;background:var(--accentBg);border:1.5px solid var(--border);color:var(--accent);font-size:.69rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;white-space:nowrap}
+.bcopy:hover{border-color:var(--border2);transform:scale(1.04)}
+.bcopy.ok{background:rgba(34,197,94,.2);border-color:var(--border2);color:#bbf7d0}
+
+.bpay{display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:9px;background:linear-gradient(135deg,var(--accent2),var(--accent));border:none;color:#fff;font-size:.69rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;white-space:nowrap;box-shadow:0 2px 12px var(--glow)}
+.bpay:hover{transform:translateY(-1px) scale(1.04);box-shadow:0 5px 20px var(--glow)}
+
+/* INFO */
+.info{display:flex;gap:10px;align-items:flex-start;background:var(--accentBg2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:14px 15px;margin-top:14px;font-size:.8rem;color:var(--text2);line-height:1.65;transition:background .3s,border-color .3s}
+
+/* FOOTER */
+footer{max-width:660px;margin:0 auto;padding:16px 18px 28px;text-align:center;border-top:1px solid var(--border);font-size:.73rem;color:var(--text3);transition:border-color .3s,color .3s}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(70px);opacity:0;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;padding:12px 26px;border-radius:9999px;font-weight:700;font-size:.8rem;box-shadow:0 8px 36px var(--glow);transition:transform .32s cubic-bezier(.34,1.56,.64,1),opacity .28s;z-index:9999;pointer-events:none;white-space:nowrap}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+.fu{opacity:0;transform:translateY(20px);animation:fu .45s forwards}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+.d1{animation-delay:.07s}.d2{animation-delay:.15s}.d3{animation-delay:.23s}.d4{animation-delay:.31s}
+
+@media(max-width:480px){
+  .logo{font-size:.92rem}
+  .nval{font-size:.76rem}
+  .bcopy,.bpay{padding:7px 9px;font-size:.65rem}
+  .chead{padding:15px 14px}
+  .cbody{padding:13px 13px}
+  .mtab-lbl{font-size:.73rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="hinner">
+    <span class="logo">IsmailUSA · AhmedDev</span>
+    <div class="hright">
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+      <div class="langs">
+        <button class="lbtn on" id="btn-tk" onclick="setLang('tk')">🇹🇲 TK</button>
+        <button class="lbtn" id="btn-ru" onclick="setLang('ru')">🇷🇺 RU</button>
+        <button class="lbtn" id="btn-tr" onclick="setLang('tr')">🇹🇷 TR</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero fu d1">
+  <div class="badge"><div class="dot"></div><span data-t="badge">Töleg Hyzmaty</span></div>
+  <h1>IsmailUSA <em>·</em> AhmedDev</h1>
+  <p data-t="heroDesc">Aşakdan töleg usulyny saýlaň we tölegi tamamlaň</p>
+</section>
+
+<!-- METHOD SELECTOR -->
+<div class="mtabs-wrap fu d2">
+  <div class="mtabs">
+    <button class="mtab on" id="tab-terminal" onclick="pick('terminal')">
+      <span class="mtab-ico">🏧</span>
+      <span class="mtab-lbl" data-t="tabTerm">Terminal Arkaly Töleg</span>
+      <span class="mtab-sub" data-t="tabTermSub">2 terminal nomer</span>
+    </button>
+    <button class="mtab" id="tab-phone" onclick="pick('phone')">
+      <span class="mtab-ico">📱</span>
+      <span class="mtab-lbl" data-t="tabPhone">0804 Arkaly Töleg</span>
+      <span class="mtab-sub" data-t="tabPhoneSub">9 telefon nomer</span>
+    </button>
+  </div>
+</div>
+
+<!-- PANEL: TERMINAL -->
+<div class="panel on fu d3" id="panel-terminal">
+  <div class="card">
+    <div class="chead">
+      <div class="cico">🏧</div>
+      <div>
+        <div class="ctag" data-t="termTag">Terminal Töleg</div>
+        <div class="ctitle" data-t="termTitle">Terminal Nomerini Saýlaň</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <div class="hint">
+        <span class="hint-icon">💡</span>
+        <span data-t="termHint">Aşakdaky terminal nomerlerinden birini saýlaň, kopýa ediň we terminaldaky tölegi geçiriň.</span>
+      </div>
+      <div class="nlist">
+        <div class="nrow">
+          <div class="nbadge">T1</div>
+          <span class="nval" id="term1">+993 61 772671</span>
+          <div class="btnrow">
+            <button class="bcopy" onclick="cp('term1',this)">📋 <span data-t="copy">Kopya et</span></button>
+          </div>
+        </div>
+        <div class="nrow">
+          <div class="nbadge">T2</div>
+          <span class="nval" id="term2">+993 64 614588</span>
+          <div class="btnrow">
+            <button class="bcopy" onclick="cp('term2',this)">📋 <span data-t="copy">Kopya et</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <span>📸</span>
+        <span data-t="termInfo">Tölegi tamamlanyňyzdan soň tassyklaýjy çegiň suratyny admine iberiň.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: PHONE -->
+<div class="panel" id="panel-phone">
+  <div class="card">
+    <div class="chead">
+      <div class="cico">📱</div>
+      <div>
+        <div class="ctag" data-t="phoneTag">0804 Töleg</div>
+        <div class="ctitle" data-t="phoneTitle">Telefon Nomerini Saýlaň</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <div class="hint">
+        <span class="hint-icon">💡</span>
+        <span data-t="phoneHint">Aşakdaky nomerlerden birine <strong>0804</strong> arkaly pul iberiň.</span>
+      </div>
+      <div class="nlist" id="phone-list"></div>
+      <div class="info">
+        <span>📸</span>
+        <span data-t="phoneInfo">Tölegden soň <strong>0801</strong>-den gelen çegiň suratyny admine ugradyň.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="fu d4">© 2026 IsmailUSA - AhmedDev</footer>
+</div>
+
+<div id="toast">✓ <span id="toast-txt">Kopýa edildi!</span></div>
+
+<script>
+const phones=['+993 61 772671','+993 64 614588','+993 71 007821','+993 71 007549','+993 62 797869','+993 61 023224','+993 63 606592','+993 62 797284','+993 65 303785'];
+
+const T={
+  tk:{badge:'Töleg Hyzmaty',heroDesc:'Aşakdan töleg usulyny saýlaň we tölegi tamamlaň',
+    tabTerm:'Terminal Arkaly Töleg',tabTermSub:'2 terminal nomer',
+    tabPhone:'0804 Arkaly Töleg',tabPhoneSub:'9 telefon nomer',
+    termTag:'Terminal Töleg',termTitle:'Terminal Nomerini Saýlaň',
+    termHint:'Aşakdaky terminal nomerlerinden birini saýlaň, kopýa ediň we terminaldaky tölegi geçiriň.',
+    termInfo:'Tölegi tamamlanyňyzdan soň tassyklaýjy çegiň suratyny admine iberiň.',
+    phoneTag:'0804 Töleg',phoneTitle:'Telefon Nomerini Saýlaň',
+    phoneHint:'Aşakdaky nomerlerden birine <strong>0804</strong> arkaly pul iberiň.',
+    phoneInfo:'Tölegden soň <strong>0801</strong>-den gelen çegiň suratyny admine ugradyň.',
+    copy:'Kopya et',pay:'💸 Töle',nomer:'Nomer',copied:'Kopýa edildi!'},
+  ru:{badge:'Платёжный Сервис',heroDesc:'Выберите способ оплаты ниже и завершите транзакцию',
+    tabTerm:'Оплата через терминал',tabTermSub:'2 номера терминала',
+    tabPhone:'Оплата через 0804',tabPhoneSub:'9 телефонных номеров',
+    termTag:'Терминал',termTitle:'Выберите номер терминала',
+    termHint:'Скопируйте один из номеров терминала ниже и проведите оплату.',
+    termInfo:'После оплаты отправьте фото чека администратору.',
+    phoneTag:'Оплата 0804',phoneTitle:'Выберите номер телефона',
+    phoneHint:'Переведите деньги на один из номеров ниже через <strong>0804</strong>.',
+    phoneInfo:'После оплаты отправьте фото чека с <strong>0801</strong> администратору.',
+    copy:'Копировать',pay:'💸 Оплатить',nomer:'Номер',copied:'Скопировано!'},
+  tr:{badge:'Ödeme Hizmeti',heroDesc:'Aşağıdan ödeme yöntemini seçin ve işlemi tamamlayın',
+    tabTerm:'Terminal ile Ödeme',tabTermSub:'2 terminal numarası',
+    tabPhone:'0804 ile Ödeme',tabPhoneSub:'9 telefon numarası',
+    termTag:'Terminal Ödeme',termTitle:'Terminal Numarasını Seçin',
+    termHint:'Aşağıdaki terminal numaralarından birini kopyalayın ve ödemeyi gerçekleştirin.',
+    termInfo:'Ödeme sonrası onay makbuzunu admine gönderin.',
+    phoneTag:'0804 Ödeme',phoneTitle:'Telefon Numarasını Seçin',
+    phoneHint:'Aşağıdaki numaralardan birine <strong>0804</strong> üzerinden para gönderin.',
+    phoneInfo:'Ödeme sonrası <strong>0801</strong>\'den gelen makbuz fotoğrafını admine gönderin.',
+    copy:'Kopyala',pay:'💸 Öde',nomer:'Numara',copied:'Kopyalandı!'},
+};
+
+let lang='tk',theme='dark';
+
+function buildPhones(){
+  const t=T[lang],list=document.getElementById('phone-list');
+  list.innerHTML='';
+  phones.forEach((num,i)=>{
+    const id='ph'+(i+1);
+    const d=document.createElement('div');d.className='nrow';
+    d.innerHTML=`<div class="nbadge">${i+1}</div><span class="nval" id="${id}">${num}</span><div class="btnrow"><button class="bcopy" onclick="cp('${id}',this)">📋 <span>${t.copy}</span></button><button class="bpay" onclick="dial('${num}')">${t.pay}</button></div>`;
+    list.appendChild(d);
+  });
+}
+
+function setLang(l){
+  lang=l;const t=T[l];
+  document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined)el.innerHTML=t[k]});
+  ['tk','ru','tr'].forEach(x=>document.getElementById('btn-'+x).classList.toggle('on',x===l));
+  buildPhones();
+}
+
+function pick(m){
+  ['terminal','phone'].forEach(x=>{
+    document.getElementById('tab-'+x).classList.toggle('on',x===m);
+    document.getElementById('panel-'+x).classList.toggle('on',x===m);
+  });
+}
+
+function cp(id,btn){
+  const val=document.getElementById(id)?.textContent?.trim();if(!val)return;
+  navigator.clipboard.writeText(val).catch(()=>{const ta=document.createElement('textarea');ta.value=val;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)});
+  btn.classList.add('ok');setTimeout(()=>btn.classList.remove('ok'),1800);
+  toast(T[lang].copied);
+}
+
+function dial(n){window.location.href='tel:'+n.replace(/\s/g,'')}
+
+let toastT;
+function toast(msg){
+  const el=document.getElementById('toast');
+  document.getElementById('toast-txt').textContent=msg;
+  el.classList.add('show');clearTimeout(toastT);
+  toastT=setTimeout(()=>el.classList.remove('show'),2300);
+}
+
+function toggleTheme(){
+  theme=theme==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+  document.getElementById('themeBtn').textContent=theme==='dark'?'🌙':'☀️';
+  localStorage.setItem('theme',theme);
+}
+
+(function(){
+  const s=localStorage.getItem('theme');
+  if(s){theme=s;document.documentElement.setAttribute('data-theme',s);document.getElementById('themeBtn').textContent=s==='dark'?'🌙':'☀️';}
+  buildPhones();
+})();
+</script>
+</body>
+</html>
