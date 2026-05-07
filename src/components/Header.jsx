@@ -1,51 +1,45 @@
-const LANGS = [
-  { code: 'tk', flag: '🇹🇲', label: 'TK' },
-  { code: 'ru', flag: '🇷🇺', label: 'RU' },
-  { code: 'tr', flag: '🇹🇷', label: 'TR' },
-]
-
 export default function Header({ lang, setLang, theme, toggleTheme }) {
+  const languages = [
+    { code: 'tk', flag: '🇹🇲', label: 'Türkmençe' },
+    { code: 'ru', flag: '🇷🇺', label: 'Русский' },
+    { code: 'tr', flag: '🇹🇷', label: 'Türkçe' },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-lg border-b border-green-500/15 dark:bg-[rgba(9,16,11,0.88)] bg-[rgba(238,248,241,0.90)] transition-colors duration-300">
-      <div className="w-full px-8 py-3 flex items-center justify-between gap-3">
-        {/* Logo */}
-        <span className="gradient-text font-sora font-extrabold text-[1.08rem] tracking-tight whitespace-nowrap">
-          IsmailUSA · AhmedDev
-        </span>
+    <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#09100b]/95 backdrop-blur-xl border-b border-green-100 dark:border-green-900">
+      <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="text-3xl font-bold tracking-tighter">IsmailUSA</div>
+          <div className="text-green-600 dark:text-green-500 font-medium">AhmedDev</div>
+        </div>
 
-        {/* Controls */}
-        <div className="flex items-center gap-2">
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-[.95rem]
-              dark:bg-green-500/10 bg-green-600/10
-              dark:border-green-500/20 border-green-600/20 border-[1.5px]
-              dark:text-green-400 text-green-700
-              hover:scale-110 transition-all duration-200"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? '🌙' : '☀️'}
-          </button>
-
-          {/* Lang buttons */}
-          <div className="flex gap-1">
-            {LANGS.map(({ code, flag, label }) => (
+        <div className="flex items-center gap-3">
+          {/* Language Switcher */}
+          <div className="flex bg-gray-100 dark:bg-[#1a2a20] rounded-3xl p-1 shadow-inner">
+            {languages.map((item) => (
               <button
-                key={code}
-                onClick={() => setLang(code)}
-                className={`px-2.5 py-1.5 rounded-lg text-[.7rem] font-bold tracking-wide border-[1.5px] transition-all duration-200 font-sora
-                  ${lang === code
-                    ? 'dark:bg-green-500/10 bg-green-600/10 dark:border-green-500/35 border-green-600/40 dark:text-green-400 text-green-700'
-                    : 'border-transparent dark:text-green-700/70 text-green-800/50 hover:dark:bg-green-500/6 hover:bg-green-600/6 hover:dark:border-green-500/20 hover:border-green-600/20'
-                  }`}
+                key={item.code}
+                onClick={() => setLang(item.code)}
+                className={`px-5 py-2.5 text-sm rounded-3xl transition-all flex items-center gap-2
+                  ${lang === item.code 
+                    ? 'bg-white dark:bg-[#0f1a13] shadow font-semibold' 
+                    : 'hover:bg-white/60 dark:hover:bg-[#13281f]'}`}
               >
-                {flag} {label}
+                <span className="text-lg">{item.flag}</span>
+                <span className="hidden sm:inline">{item.label}</span>
               </button>
             ))}
           </div>
+
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-[#1a2a20] hover:bg-gray-200 dark:hover:bg-[#13281f] rounded-3xl transition-all text-xl"
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
       </div>
     </header>
-  )
+  );
 }

@@ -1,14 +1,20 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react';
 
-export function useToast() {
-  const [toast, setToast] = useState({ visible: false, msg: '' })
-  const timer = useRef(null)
+export const useToast = () => {
+  const [toast, setToast] = useState({ visible: false, msg: '' });
 
-  const show = (msg) => {
-    clearTimeout(timer.current)
-    setToast({ visible: true, msg })
-    timer.current = setTimeout(() => setToast({ visible: false, msg }), 2300)
-  }
+  const show = (message) => {
+    setToast({ visible: true, msg: message });
+  };
 
-  return { toast, show }
-}
+  useEffect(() => {
+    if (toast.visible) {
+      const timer = setTimeout(() => {
+        setToast({ visible: false, msg: '' });
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast.visible]);
+
+  return { toast, show };
+};
