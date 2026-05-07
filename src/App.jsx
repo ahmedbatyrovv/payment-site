@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useTheme } from './hooks/useTheme'
 import { useToast } from './hooks/useToast'
 import { TRANSLATIONS } from './data'
-
 import Header from './components/Header'
 import Hero from './components/Hero'
 import MethodTabs from './components/MethodTabs'
@@ -15,7 +14,6 @@ export default function App() {
   const { toast, show: showToast } = useToast()
   const [lang, setLang] = useState('tk')
   const [method, setMethod] = useState('terminal')
-
   const t = TRANSLATIONS[lang]
 
   return (
@@ -32,14 +30,16 @@ export default function App() {
 
         <MethodTabs method={method} setMethod={setMethod} t={t} />
 
-        <main className="max-w-[660px] mx-auto px-5 pb-10 animate-fade-up" style={{ animationDelay: '.23s', opacity: 0 }}>
-          {method === 'terminal'
-            ? <TerminalPanel t={t} showToast={showToast} />
-            : <PhonePanel t={t} showToast={showToast} />
-          }
+        <main className="max-w-[720px] mx-auto px-4 sm:px-6 md:px-8 lg:px-6 pb-12 pt-4 animate-fade-up">
+          <div className="w-full">
+            {method === 'terminal'
+              ? <TerminalPanel t={t} showToast={showToast} />
+              : <PhonePanel t={t} showToast={showToast} />
+            }
+          </div>
         </main>
 
-        <footer className="max-w-[660px] mx-auto px-5 py-5 text-center border-t dark:border-green-500/14 border-green-600/16 text-[.73rem] dark:text-green-900 text-green-800/40 transition-colors duration-300">
+        <footer className="max-w-[720px] mx-auto px-4 sm:px-6 py-6 text-center border-t dark:border-green-500/20 border-green-600/20 text-[0.75rem] dark:text-green-900/70 text-green-800/50 transition-colors duration-300">
           © 2026 IsmailUSA - AhmedDev
         </footer>
       </div>
