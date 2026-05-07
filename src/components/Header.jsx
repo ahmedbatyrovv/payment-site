@@ -11,39 +11,40 @@ export default function Header({ lang, setLang, theme, toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-lg border-b border-green-500/15 dark:bg-[rgba(9,16,11,0.88)] bg-[rgba(238,248,241,0.90)] transition-colors duration-300">
-      <div className="w-full px-5 sm:px-8 py-3 flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-50 backdrop-blur-lg border-b border-green-500/15 
+      dark:bg-[rgba(9,16,11,0.95)] bg-[rgba(238,248,241,0.95)] transition-colors duration-300">
+      
+      <div className="max-w-[720px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
         
         {/* Logo */}
-        <span className="gradient-text font-sora font-extrabold text-[1.08rem] tracking-tight whitespace-nowrap">
+        <span className="gradient-text font-sora font-extrabold text-[1.1rem] sm:text-[1.2rem] tracking-tight whitespace-nowrap">
           IsmailUSA · AhmedDev
         </span>
 
-        {/* Desktop Controls */}
-        <div className="hidden md:flex items-center gap-2">
+        {/* Desktop & Tablet Controls */}
+        <div className="hidden md:flex items-center gap-3">
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-[.95rem]
+            className="w-10 h-10 rounded-full flex items-center justify-center text-xl
               dark:bg-green-500/10 bg-green-600/10
               dark:border-green-500/20 border-green-600/20 border-[1.5px]
               dark:text-green-400 text-green-700
-              hover:scale-110 transition-all duration-200"
-            aria-label="Toggle theme"
+              hover:scale-110 active:scale-95 transition-all duration-200"
           >
             {theme === 'dark' ? '🌙' : '☀️'}
           </button>
 
-          {/* Language Buttons */}
-          <div className="flex gap-1">
+          {/* Language Switcher */}
+          <div className="flex gap-1 bg-white/60 dark:bg-black/30 rounded-2xl p-1">
             {LANGS.map(({ code, flag, label }) => (
               <button
                 key={code}
                 onClick={() => setLang(code)}
-                className={`px-3 py-1.5 rounded-lg text-[.75rem] font-bold tracking-wide border-[1.5px] transition-all duration-200 font-sora
+                className={`px-4 py-2 rounded-xl text-sm font-bold tracking-wider transition-all duration-200
                   ${lang === code
-                    ? 'dark:bg-green-500/10 bg-green-600/10 dark:border-green-500/35 border-green-600/40 dark:text-green-400 text-green-700'
-                    : 'border-transparent dark:text-green-700/70 text-green-800/50 hover:dark:bg-green-500/6 hover:bg-green-600/6 hover:dark:border-green-500/20 hover:border-green-600/20'
+                    ? 'dark:bg-green-500/10 bg-green-600/10 dark:border-green-500/40 border-green-600/40 dark:text-green-300 text-green-700 shadow-sm'
+                    : 'hover:bg-green-500/10 dark:hover:bg-green-500/10'
                   }`}
               >
                 {flag} {label}
@@ -55,30 +56,35 @@ export default function Header({ lang, setLang, theme, toggleTheme }) {
         {/* Mobile Burger Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-green-500/10 transition-colors"
+          className="md:hidden w-11 h-11 flex items-center justify-center rounded-2xl hover:bg-green-500/10 active:bg-green-500/20 transition-all"
         >
-          {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full Responsive */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-green-500/10 bg-white/95 dark:bg-[#09100b]/95 backdrop-blur-lg px-5 py-6">
-          <div className="flex flex-col gap-4">
+        <div className="md:hidden border-t border-green-500/10 bg-white/95 dark:bg-[#09100b]/95 backdrop-blur-xl px-4 sm:px-6 py-6">
+          <div className="flex flex-col gap-5 max-w-[720px] mx-auto">
             
-            {/* Theme Toggle in Mobile */}
+            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="flex items-center gap-3 px-4 py-4 rounded-2xl hover:bg-green-500/10 transition-all w-full text-left"
+              className="flex items-center gap-4 w-full px-5 py-5 rounded-2xl hover:bg-green-500/10 transition-all"
             >
-              <span className="text-2xl">{theme === 'dark' ? '🌙' : '☀️'}</span>
-              <span className="font-medium">Tema çalşyr ({theme === 'dark' ? 'Dark' : 'Light'})</span>
+              <span className="text-3xl">{theme === 'dark' ? '🌙' : '☀️'}</span>
+              <div className="text-left">
+                <p className="font-semibold">Tema çalşyr</p>
+                <p className="text-sm text-green-600 dark:text-green-500">
+                  {theme === 'dark' ? 'Dark mode' : 'Light mode'}
+                </p>
+              </div>
             </button>
 
-            {/* Language Buttons in Mobile */}
-            <div className="px-4 py-2">
-              <p className="text-xs text-green-600 dark:text-green-500 mb-3 font-medium">Dil saýlaň</p>
-              <div className="flex flex-wrap gap-2">
+            {/* Language Selection */}
+            <div>
+              <p className="text-green-600 dark:text-green-500 text-sm font-medium px-5 mb-3">Dil saýlaň</p>
+              <div className="grid grid-cols-3 gap-3 px-2">
                 {LANGS.map(({ code, flag, label }) => (
                   <button
                     key={code}
@@ -86,13 +92,14 @@ export default function Header({ lang, setLang, theme, toggleTheme }) {
                       setLang(code);
                       setIsMenuOpen(false);
                     }}
-                    className={`px-5 py-3 rounded-2xl text-base font-semibold border-[1.5px] transition-all
+                    className={`flex flex-col items-center justify-center py-6 rounded-2xl border transition-all
                       ${lang === code
-                        ? 'dark:bg-green-500/10 bg-green-600/10 dark:border-green-500/40 border-green-600/40 dark:text-green-400 text-green-700'
-                        : 'border-transparent hover:bg-green-500/10'
+                        ? 'border-green-500 bg-green-500/10 dark:bg-green-500/20'
+                        : 'border-transparent hover:bg-green-500/5'
                       }`}
                   >
-                    {flag} {label}
+                    <span className="text-4xl mb-2">{flag}</span>
+                    <span className="font-bold text-sm">{label}</span>
                   </button>
                 ))}
               </div>
