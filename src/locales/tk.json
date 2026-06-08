@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Baş sahypa",
+    "terminal": "Terminal",
+    "sms": "SMS Töleg",
+    "features": "Aýratynlyklar",
+    "contact": "Habarlaşmak"
+  },
+  "hero": {
+    "badge": "Premium Töleg Ulgamy",
+    "title": "Çalt we Ygtybarly",
+    "titleAccent": "Tölegler",
+    "subtitle": "Terminal we 0804 SMS tölegleri bir ýerde. Tiz, howpsuz we ýönekeý.",
+    "cta": "Tölegni Başla",
+    "ctaSecondary": "Nädip işleýär?"
+  },
+  "terminal": {
+    "title": "Terminal Töleg",
+    "subtitle": "Aşakdaky nomerlere geçiriň",
+    "copy": "Kopyala",
+    "copied": "Kopýalandi!"
+  },
+  "sms": {
+    "title": "0804 SMS Töleg",
+    "subtitle": "Nomer saýlaň, mukdar giriziň we töläň",
+    "amountPlaceholder": "Mukdar (TMT)",
+    "copy": "Kopyala",
+    "copied": "Kopýalandi!",
+    "pay": "Töle",
+    "payNow": "Häzir töle"
+  },
+  "features": {
+    "title": "Näme üçin AhmedDev?",
+    "subtitle": "Premium töleg tejribesi üçin ähli aýratynlyklar",
+    "responsive": {
+      "title": "Doly Responsive",
+      "desc": "Mobil, planşet we kompýuterde ajaýyp görünýär"
+    },
+    "sms": {
+      "title": "0804 SMS Integrasiýa",
+      "desc": "Android enjamlar bilen doly utgaşýar"
+    },
+    "fast": {
+      "title": "Tiz Tölegler",
+      "desc": "Birnäçe sekuntda töleg amala aşyrylýar"
+    },
+    "secure": {
+      "title": "Howpsuz Proses",
+      "desc": "Ähli maglumatlar şifrlenýär we goralýar"
+    }
+  },
+  "contact": {
+    "title": "Habarlaşmak",
+    "subtitle": "Islendik sorag üçin biziň bilen habarlaşyň",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp"
+  },
+  "toast": {
+    "copied": "Nomer göçürildi!",
+    "smsOpened": "SMS programmasy açylýar..."
+  },
+  "footer": {
+    "rights": "Ähli hukuklar goralan",
+    "tagline": "Premium Töleg Çözgütleri"
+  }
+}

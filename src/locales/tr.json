@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "terminal": "Terminal",
+    "sms": "SMS Ödeme",
+    "features": "Özellikler",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "badge": "Premium Ödeme Sistemi",
+    "title": "Hızlı ve Güvenli",
+    "titleAccent": "Ödemeler",
+    "subtitle": "Terminal ve 0804 SMS ödemeleri tek yerde. Hızlı, güvenli ve kolay.",
+    "cta": "Ödemeye Başla",
+    "ctaSecondary": "Nasıl çalışır?"
+  },
+  "terminal": {
+    "title": "Terminal Ödeme",
+    "subtitle": "Aşağıdaki numaralara transfer yapın",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı!"
+  },
+  "sms": {
+    "title": "0804 SMS Ödeme",
+    "subtitle": "Numara seçin, miktar girin ve ödeyin",
+    "amountPlaceholder": "Miktar (TMT)",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı!",
+    "pay": "Öde",
+    "payNow": "Şimdi öde"
+  },
+  "features": {
+    "title": "Neden AhmedDev?",
+    "subtitle": "Premium ödeme deneyimi için tüm özellikler",
+    "responsive": {
+      "title": "Tam Responsive",
+      "desc": "Mobil, tablet ve masaüstünde mükemmel görünür"
+    },
+    "sms": {
+      "title": "0804 SMS Entegrasyonu",
+      "desc": "Android cihazlarla tam uyumlu çalışır"
+    },
+    "fast": {
+      "title": "Hızlı Ödemeler",
+      "desc": "Birkaç saniye içinde ödeme tamamlanır"
+    },
+    "secure": {
+      "title": "Güvenli Süreç",
+      "desc": "Tüm veriler şifrelenir ve korunur"
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Herhangi bir soru için bizimle iletişime geçin",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp"
+  },
+  "toast": {
+    "copied": "Numara kopyalandı!",
+    "smsOpened": "SMS uygulaması açılıyor..."
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır",
+    "tagline": "Premium Ödeme Çözümleri"
+  }
+}
