@@ -4,6 +4,7 @@ import { Copy, Check, MessageSquare, Send } from 'lucide-react'
 
 export default function SMSCard({ number, label, copyLabel, copiedLabel, payLabel, index }) {
   const [copied, setCopied] = useState(false)
+  const [amount, setAmount] = useState('')
 
   const handleCopy = () => {
     navigator.clipboard.writeText(number.replace(/\s/g, ''))
@@ -12,8 +13,9 @@ export default function SMSCard({ number, label, copyLabel, copiedLabel, payLabe
   }
 
   const handlePay = () => {
-    const clean = number.replace(/\s/g, '')
-    window.location.href = `sms:${clean}?body=Payment`
+    const cleanNumber = number.replace(/\s/g, '')
+    const body = `${cleanNumber}%20${amount}`
+    window.location.href = `sms:0804?body=${body}`
   }
 
   const gradients = [
@@ -39,6 +41,7 @@ export default function SMSCard({ number, label, copyLabel, copiedLabel, payLabe
         boxShadow: '0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)',
       }}
     >
+      {/* Label */}
       <div className="flex items-center gap-2 mb-4">
         <div
           className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -49,11 +52,34 @@ export default function SMSCard({ number, label, copyLabel, copiedLabel, payLabe
         <span className="text-xs font-semibold text-indigo-400 uppercase tracking-widest">{label}</span>
       </div>
 
+      {/* Phone number */}
       <div className="mb-4">
         <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Number</p>
         <p className="font-mono text-lg font-bold text-white tracking-wide">{number}</p>
       </div>
 
+      {/* Amount input */}
+      <div className="mb-4">
+        <p className="text-xs text-slate-500 uppercase tracking-widest mb-1.5">Amount</p>
+        <input
+          type="number"
+          min="0"
+          value={amount}
+          onChange={e => setAmount(e.target.value)}
+          placeholder="0"
+          className="w-full px-3 py-2.5 rounded-xl text-sm font-mono font-semibold text-white placeholder-slate-600 outline-none transition-all"
+          style={{
+            background: 'rgba(7,19,69,0.7)',
+            border: '1px solid rgba(99,102,241,0.2)',
+            WebkitAppearance: 'none',
+            MozAppearance: 'textfield',
+          }}
+          onFocus={e => e.target.style.border = '1px solid rgba(99,102,241,0.5)'}
+          onBlur={e => e.target.style.border = '1px solid rgba(99,102,241,0.2)'}
+        />
+      </div>
+
+      {/* Buttons */}
       <div className="flex gap-2">
         <motion.button
           whileTap={{ scale: 0.93 }}
