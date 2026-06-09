@@ -66,8 +66,8 @@ const contacts = [
       },
       {
         name: 'Instagram',
-        handle: '@ismail__usa',
-        href: 'https://instagram.com/ismail__usa',
+        handle: '@ismail___usa',
+        href: 'https://instagram.com/ismail___usa',
         color: '#E1306C',
         bg: 'rgba(225,48,108,0.10)',
         border: 'rgba(225,48,108,0.22)',
