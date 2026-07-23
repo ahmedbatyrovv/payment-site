@@ -1,6 +1,6 @@
 export const translations = {
   tk: {
-    brand: 'AhmedDev – IsmailUSA',
+    brand: 'IsmailUSA',
     nav: {
       payments: 'Tölegler',
       faq: 'Sorag-Jogap',
