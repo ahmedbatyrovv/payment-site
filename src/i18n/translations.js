@@ -56,7 +56,7 @@ export const translations = {
     },
   },
   ru: {
-    brand: 'AhmedDev – IsmailUSA',
+    brand: 'IsmailUSA',
     nav: {
       payments: 'Платежи',
       faq: 'Вопросы и ответы',
@@ -112,7 +112,7 @@ export const translations = {
     },
   },
   tr: {
-    brand: 'AhmedDev – IsmailUSA',
+    brand: 'IsmailUSA',
     nav: {
       payments: 'Ödemeler',
       faq: 'Sık Sorulan Sorular',

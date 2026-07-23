@@ -5,7 +5,7 @@ export default function Footer({ t }) {
       style={{ borderTop: '1px solid rgba(99,102,241,0.1)' }}
     >
       <p className="text-sm text-slate-500">
-        AhmedDev – IsmailUSA © 2026 &mdash; {t.footer.rights}
+       IsmailUSA © 2026 &mdash; {t.footer.rights}
       </p>
     </footer>
   )

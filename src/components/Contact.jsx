@@ -35,7 +35,7 @@ const contacts = [
       {
         name: 'WhatsApp',
         handle: '+993 64 614588',
-        href: 'https://wa.me/15550000000',
+        href: 'https://wa.me/99364614588',
         color: '#25D366',
         bg: 'rgba(37,211,102,0.10)',
         border: 'rgba(37,211,102,0.22)',

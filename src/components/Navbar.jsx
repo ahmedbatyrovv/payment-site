@@ -51,11 +51,10 @@ export default function Navbar({ lang, setLang, sidebarOpen, setSidebarOpen }) {
                   boxShadow: '0 0 16px rgba(99,102,241,0.5)',
                 }}
               >
-                AD
+                IU
               </div>
               <span className="font-bold text-white text-sm md:text-base tracking-tight hidden sm:block">
-                AhmedDev{' '}
-                <span className="text-indigo-400">–</span>{' '}
+                <span className="text-indigo-400"></span>{' '}
                 IsmailUSA
               </span>
             </div>
